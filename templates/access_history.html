@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}Access History{% endblock %}
+
+{% block content %}
+    <h2>Data Access History</h2>
+    {% if logs %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Dataset Name</th>
+                    <th>Purpose</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log.id }}</td>
+                    <td>{{ log.username }}</td>
+                    <td>{{ log.dataset_name }}</td>
+                    <td>{{ log.access_purpose }}</td>
+                    <td>{{ log.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No access logs found yet. Log an entry using the "Log Access" page!</p>
+    {% endif %}
+{% endblock %}
