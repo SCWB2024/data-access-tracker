@@ -1,19 +1,30 @@
 {% extends "layout.html" %}
 
-{% block title %}Log Access{% endblock %}
+{% block title %}Log Data Access{% endblock %}
 
 {% block content %}
-    <h2>Log Data Access</h2>
-    <form method="POST" action="{{ url_for('log_access') }}">
-        <label for="username">Your Username:</label><br>
-        <input type="text" id="username" name="username" required><br><br>
+<div class="container mt-4">
+    <h1 class="mb-4">Log New Data Access</h1>
+    <form method="POST">
+        {# CSRF Token: Essential for security with Flask-WTF and CSRFProtect #}
+        {{ csrf_token }}
 
-        <label for="dataset_name">Dataset Name:</label><br>
-        <input type="text" id="dataset_name" name="dataset_name" required><br><br>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
 
-        <label for="access_purpose">Purpose of Access:</label><br>
-        <textarea id="access_purpose" name="access_purpose" rows="5" required></textarea><br><br>
+        <div class="mb-3">
+            <label for="dataset_name" class="form-label">Dataset Name:</label>
+            <input type="text" class="form-control" id="dataset_name" name="dataset_name" required>
+        </div>
 
-        <button type="submit">Log Access</button>
+        <div class="mb-3">
+            <label for="purpose" class="form-label">Purpose of Access:</label>
+            <textarea class="form-control" id="purpose" name="purpose" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Log Access</button>
     </form>
+</div>
 {% endblock %}
